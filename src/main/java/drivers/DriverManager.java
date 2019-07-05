@@ -1,6 +1,7 @@
 package drivers;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,6 +15,8 @@ public class DriverManager {
     private static final Logger LOGGER = LoggerFactory.getLogger(DriverManager.class);
 
     private static WebDriver driver;
+    private static WebDriverWait wait;
+    private static DriverWrapper driverWrapper;
 
     public static WebDriver createDriver() {
         Properties properties = getProperties();
@@ -23,6 +26,9 @@ public class DriverManager {
 
         String url = properties.getProperty("baseUrl") + properties.getProperty("branchUrl");
         driver.get(url);
+
+        wait = new WebDriverWait(driver, Long.valueOf(properties.getProperty("waitTimeoutInSeconds")));
+        driverWrapper = new DriverWrapper(driver, wait);
 
         return driver;
     }
@@ -40,8 +46,16 @@ public class DriverManager {
         return properties;
     }
 
-    public WebDriver getDriver() {
+    public static WebDriver getDriver() {
         return driver;
+    }
+
+    public static WebDriverWait getWait() {
+        return wait;
+    }
+
+    public static DriverWrapper getDriverWrapper() {
+        return driverWrapper;
     }
 
     public static void closeDriver() {

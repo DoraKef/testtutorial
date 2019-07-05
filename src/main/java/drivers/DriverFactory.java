@@ -1,5 +1,6 @@
 package drivers;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -29,6 +30,8 @@ class DriverFactory {
     }
 
     private static WebDriver getChromeDriver() {
+        WebDriverManager.chromedriver().setup();
+
         ChromeOptions options = new ChromeOptions();
         options.setHeadless(false);
 
@@ -40,6 +43,8 @@ class DriverFactory {
     }
 
     private static WebDriver getFirefoxDriver() {
+        WebDriverManager.firefoxdriver().setup();
+
         FirefoxOptions options = new FirefoxOptions();
         options.setHeadless(false);
 

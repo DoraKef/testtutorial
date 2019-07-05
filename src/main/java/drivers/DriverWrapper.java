@@ -78,4 +78,13 @@ public class DriverWrapper {
         element.clear();
         element.sendKeys(text);
     }
+
+    public WebElement findElement(String locator) {
+        return wait.until(ExpectedConditions.presenceOfElementLocated(locate(locator)));
+    }
+
+    public String getText(String locator) {
+        WebElement we = wait.until(ExpectedConditions.presenceOfElementLocated(locate(locator)));
+        return we.getText();
+    }
 }
