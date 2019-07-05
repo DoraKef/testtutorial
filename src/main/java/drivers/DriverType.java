@@ -2,8 +2,8 @@ package drivers;
 
 import org.openqa.selenium.WebDriverException;
 
-import static drivers.StringHelpers.isNull;
-import static drivers.StringHelpers.isWhitespace;
+import static utils.helpers.StringHelpers.isNull;
+import static utils.helpers.StringHelpers.isWhitespace;
 
 public enum DriverType {
     CHROME,
